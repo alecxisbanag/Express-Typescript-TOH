@@ -22,8 +22,18 @@ router.get("/", (req: Request, res: Response) => {
 
 router.get("/:id", (req: Request, res: Response) => {
     let id: number = +req.params.id;
-    console.log(id);
     res.send(HEROES.find(hero => hero.getId() === id));
+});
+
+router.post("/:id", (req: Request, res: Response) => {
+    let id: number = +req.params.id;
+    let newHero: any =  req.body;
+    let tempHero: any =  HEROES.find(hero => hero.getId() === id);
+    if(typeof tempHero !== "undefined"){
+        let index: number = HEROES.indexOf(tempHero);
+        HEROES[index] = new Hero(newHero.id, newHero.name);
+    }
+    res.send(newHero);
 });
 
 export const HeroesController: Router = router;

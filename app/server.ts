@@ -8,6 +8,7 @@ const app: express.Application = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(express.json());
 app.use('/welcome', WelcomeController);
 app.use('/heroes', HeroesController);
 
